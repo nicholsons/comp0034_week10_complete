@@ -13,3 +13,4 @@ selenium~=3.141.0
 pytest~=6.2.2
 Flask-Testing~=0.8.1
 requests~=2.25.1
+Flask-HTTPAuth~=4.2.0

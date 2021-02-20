@@ -5,9 +5,6 @@ from my_app import db
 
 
 class User(UserMixin, db.Model):
-    # Uncomment the following line and remove all the field definitions if you want to experiment with
-    # reflection
-    # __table__ = db.Model.metadata.tables['user']
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.Text, nullable=False)
@@ -26,6 +23,15 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
 
+class Area(db.Model):
+    __tablename__ = 'area'
+    code = db.Column(db.Text, nullable=False, primary_key=True)
+    area = db.Column(db.Text, nullable=False)
+
+    def __repr__(self):
+        return self.area
+
+
 class Profile(db.Model):
     __tablename__ = "profile"
     id = db.Column(db.Integer, primary_key=True)
@@ -35,11 +41,11 @@ class Profile(db.Model):
     area = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-
-class Area(db.Model):
-    __tablename__ = 'area'
-    code = db.Column(db.Text, nullable=False, primary_key=True)
-    area = db.Column(db.Text, nullable=False)
-
-    def __repr__(self):
-        return self.area
+    @property
+    def serialize(self):
+        return {
+            'id': self.user_id,
+            'username': self.username,
+            'bio': self.bio,
+            'area': self.area
+        }
