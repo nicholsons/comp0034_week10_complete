@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% set title = 'Profile Display' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+    {% for result, url in profiles %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ url }}" alt="User profile photo">
+            <div class="card-body">
+                <h5 class="card-title">{{ result.username }}</h5>
+                <h6>{{ result.area }}</h6>
+                <p class="card-text">{{ result.bio }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

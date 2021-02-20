@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <p>Welcome {{ name }}</p>
+    <br>
+    <h2>Latest recycling news</h2>
+    {% for article in news['articles'] %}
+        <p><a href="{{ article.url|e }}">{{ article.title|e }}</a></p>
+    {% endfor %}
+{% endblock %}

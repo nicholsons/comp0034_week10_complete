@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>{{ title }}</title>
+</head>
+<body>
+<header>
+    {% include 'navigation.html' %}
+</header>
+<main>
+    {# Displays flashed messages on a page #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="list-unstyled">
+                {% for message in messages %}
+                    <li class="alert alert-primary" role="alert">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+</body>
+</html>
